@@ -11,6 +11,22 @@ import imgSquare from '../jk-BolshoyPalashevsky 11.webp';
 // @ts-ignore
 import imgPortrait from '../jk-BolshoyPalashevsky11.webp';
 
+async function collectMeta() {
+  const params = new URLSearchParams(window.location.search);
+  const utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+  const utm = utmKeys.filter(k => params.get(k)).map(k => `${k}=${params.get(k)}`).join(' / ');
+  const ref = document.referrer;
+  const referrer = ref ? (() => { try { return new URL(ref).hostname; } catch { return ref; } })() : 'Прямой заход';
+  const ua = navigator.userAgent;
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(ua);
+  const browser = /Edg/.test(ua) ? 'Edge' : /Chrome/.test(ua) ? 'Chrome' : /Firefox/.test(ua) ? 'Firefox' : /Safari/.test(ua) ? 'Safari' : 'Другой';
+  const os = /iPhone|iPad/.test(ua) ? 'iOS' : /Android/.test(ua) ? 'Android' : /Windows/.test(ua) ? 'Windows' : /Mac/.test(ua) ? 'macOS' : 'Другое';
+  const device = `${isMobile ? 'Мобильный' : 'Десктоп'} · ${browser} · ${os}`;
+  let city = '';
+  try { const g = await fetch('https://ipapi.co/json/').then(r => r.json()); city = g.city ? `${g.city}, ${g.country_name}` : ''; } catch (_) {}
+  return { utm, referrer, device, city };
+}
+
 const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
@@ -36,11 +52,12 @@ function LeadForm({ onSuccess, dark = false }: { onSuccess?: () => void; dark?: 
     e.preventDefault();
     if (phone.replace(/\D/g, '').length < 11) { setPhoneError(true); return; }
     setState('loading');
+    const meta = await collectMeta();
     try {
       await fetch('https://lidoweb-theta.vercel.app/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, site: 'ЖК Большой Палашевский, 11–13' }),
+        body: JSON.stringify({ name, phone, site: 'ЖК Большой Палашевский, 11–13', ...meta }),
       });
     } catch (_) {}
     setState('success');
