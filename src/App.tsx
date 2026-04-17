@@ -153,16 +153,53 @@ function LeadModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+function LeadMagnetPopup({ onClose }: { onClose: () => void }) {
+  return (
+    <motion.div className="fixed inset-0 z-[60] flex items-end" onClick={onClose}>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        className="absolute inset-0 bg-black/40" />
+      <motion.div
+        initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+        transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+        className="relative w-full h-[60vh] bg-[#1B4D3E] flex flex-col"
+        onClick={e => e.stopPropagation()}>
+        <div className="flex items-start justify-between px-8 pt-8 pb-2">
+          <div>
+            <p className="text-[10px] uppercase tracking-[2px] text-white/40 mb-3">Специальное предложение</p>
+            <h2 className="text-2xl md:text-3xl font-light text-white mb-1">Получить презентацию</h2>
+            <p className="text-white/60 text-sm">и условия беспроцентной рассрочки</p>
+          </div>
+          <button onClick={onClose} className="text-white/30 hover:text-white/70 transition-colors mt-1">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="flex-1 px-8 pb-8 overflow-y-auto">
+          <div className="w-full max-w-md pt-4">
+            <LeadForm dark onSuccess={() => setTimeout(onClose, 2500)} />
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 // ─── App ─────────────────────────────────────────────────────
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modal, setModal] = useState(false);
+  const [leadMagnet, setLeadMagnet] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('lm_seen')) return;
+    const t = setTimeout(() => setLeadMagnet(true), 8000);
+    return () => clearTimeout(t);
   }, []);
 
   const navLinks = [
@@ -176,6 +213,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-bg font-sans selection:bg-emerald selection:text-white">
       <AnimatePresence>{modal && <LeadModal onClose={() => setModal(false)} />}</AnimatePresence>
+      <AnimatePresence>{leadMagnet && <LeadMagnetPopup onClose={() => { setLeadMagnet(false); sessionStorage.setItem('lm_seen', '1'); }} />}</AnimatePresence>
 
       {/* Floating CTA */}
       <motion.button
