@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://palashevsky11.ru/</loc>
+    <image:image>
+      <image:loc>https://palashevsky11.ru/images/zhk-palashevsky-11-13-fasad.webp</image:loc>
+      <image:title>ЖК Большой Палашевский 11–13 — фасад</image:title>
+      <image:caption>Фасад элитного жилого комплекса Большой Палашевский 11 на Патриарших прудах</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://palashevsky11.ru/images/zhk-palashevsky-11-13-interer.webp</image:loc>
+      <image:title>ЖК Большой Палашевский 11–13 — интерьер</image:title>
+      <image:caption>Интерьеры квартир жилого комплекса Большой Палашевский 11 от Sminex</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://palashevsky11.ru/images/zhk-palashevsky-11-13-vid.webp</image:loc>
+      <image:title>ЖК Большой Палашевский 11–13 — вид</image:title>
+      <image:caption>Вид на коллекционный дом Большой Палашевский 11 в Москве, Патриаршие пруды</image:caption>
+    </image:image>
+  </url>
+</urlset>

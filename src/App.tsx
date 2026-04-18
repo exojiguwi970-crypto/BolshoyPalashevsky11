@@ -4,12 +4,9 @@ import { MapPin, Trees, Key, ChevronRight, Phone, Menu, X, ArrowUpRight, CheckCi
 import { cn } from './lib/utils';
 
 // Local images
-// @ts-ignore
-import imgHero from '../jk-Bolshoy Palashevsky11.webp';
-// @ts-ignore
-import imgSquare from '../jk-BolshoyPalashevsky 11.webp';
-// @ts-ignore
-import imgPortrait from '../jk-BolshoyPalashevsky11.webp';
+const imgHero = '/images/zhk-palashevsky-11-13-fasad.webp';
+const imgSquare = '/images/zhk-palashevsky-11-13-interer.webp';
+const imgPortrait = '/images/zhk-palashevsky-11-13-vid.webp';
 
 async function collectMeta() {
   const params = new URLSearchParams(window.location.search);

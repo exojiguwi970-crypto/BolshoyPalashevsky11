@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
+Sitemap: https://palashevsky11.ru/sitemap_index.xml
 Sitemap: https://palashevsky11.ru/sitemap.xml
+Sitemap: https://palashevsky11.ru/sitemap-images.xml

@@ -1,0 +1,12 @@
+{
+  "name": "ЖК Большой Палашевский 11",
+  "short_name": "Палашевский 11",
+  "description": "Элитный коллекционный дом от Sminex на Патриарших прудах. 45 квартир, пентхаусы, архитектура ADM.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F6F2",
+  "theme_color": "#F8F6F2",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
